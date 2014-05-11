@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %}Оформление заказа{% endblock %}
+
+{% block content %}
+    <!-- .checkout -->
+      <div class="highlighted checkout">
+        <!-- .holder -->
+        <div class="holder">
+          <!-- .breadcrumbs -->
+          <ul class="breadcrumbs">
+            <li><a href="/">Главная</a></li>
+            <li>Оформление заказа</li>
+          </ul>
+          <!--// .breadcrumbs -->
+          <h2 class="headline">Оформление заказа</h2>
+          <!-- .checkout-in -->
+          <div class="checkout-in">
+            
+            <!--// .col -->
+            <!-- .col -->
+            <form method='POST' class="col left">
+              <div class="form-row">
+                {% if form.fio.errors %}
+                    <div class="form-error">{{ form.fio.errors.0 }}</div>
+                {% endif %}
+                {{ form.fio }}
+              </div>
+              <div class="form-row">
+                {% if form.inn.errors %}
+                    <div class="form-error">{{ form.inn.errors.0 }}</div>
+                {% endif %}
+                {{ form.inn }}
+              </div>
+              <div class="form-row">
+                {% if form.kpp.errors %}
+                    <div class="form-error">{{ form.kpp.errors.0 }}</div>
+                {% endif %}
+                {{ form.kpp }}
+              </div>
+              <div class="form-row">
+                {% if form.ur_address.errors %}
+                    <div class="form-error">{{ form.ur_address.errors.0 }}</div>
+                {% endif %}
+                {{ form.ur_address }}
+              </div>
+              <div class="form-row">
+                {% if form.address.errors %}
+                    <div class="form-error">{{ form.address.errors.0 }}</div>
+                {% endif %}
+                {{ form.address }}
+              </div>
+              <div class="form-row">
+                {% if form.contacts.errors %}
+                    <div class="form-error">{{ form.contacts.errors.0 }}</div>
+                {% endif %}
+                {{ form.contacts }}
+              </div>
+              
+              <div class="form-row">
+                {% if orderform.comment.errors %}
+                    <div class="form-error">{{ orderform.comment.errors.0 }}</div>
+                {% endif %}
+                {{ orderform.comment }}
+              </div>
+              <!-- .delivery -->
+              <div class="delivery">
+                <h3 class="headline">Доставка</h3>
+                {% if orderform.delivery.errors %}
+                    <div class="form-error">{{ orderform.delivery.errors.0 }}</div>
+                {% endif %}
+                <ul class="delivery-list">
+                  <li><label><input type="radio" name="delivery" value="1">Доставка по Москве</label></li>
+                  <li><label><input type="radio" name="delivery" value="2">Доставка до ТК</label></li>
+                  <li><label><input type="radio" name="delivery" value="3">Доставка до двери за пределами Москвы</label></li>
+                  <li><label><input type="radio" name="delivery" value="4">Самовывоз со склада в Москве</label></li>
+                </ul>
+              </div>
+              <!--// .delivery -->
+              
+              <button type='submit' class="btn btn-orange">Оформить</button>
+              {% csrf_token %}
+            </form>
+            
+            <!--// .col -->
+          </div>
+          <!--// .checkout-in -->
+        </div>
+        <!--// .holder -->
+      </div>
+      <!--// .checkout -->
+      
+      <div class="checkout-required-note">* Поле, обязательное для заполнения</div>
+
+
+    
+{% endblock %}

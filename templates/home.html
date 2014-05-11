@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+   {% include 'search.html' %}
+    <!-- .slider -->
+   <!-- .slider -->
+      <div class="slider">
+          {% for s in slideshow %}
+          <div class="slide {% if forloop.first %} active{% endif %}">
+            <a href='{{ s.href }}'>
+              <div class="headline">{{ s.name|safe }}</div>
+              <img src="/media/{{ s.image }}" width="814" height="191">
+            </a>
+          </div>
+          {% endfor %}
+          
+          <ul class="slider-nav">
+              <li></li>
+          </ul>
+      </div>
+      <!--// .slider -->
+    <!-- .season-novelties -->
+    <div class="season-novelties catalog-block highlighted">
+        <div class="view-all"><a href="/catalog/">Смотреть весь каталог</a></div>
+        <h2 class="headline">Новинки сезона</h2>
+        <!-- .catalog-list -->
+        <ul class="catalog-list">
+            {% for i in novelty_home %}{% include 'item_short.html' with i=i %}{% endfor %}
+        </ul>
+        <!--// .catalog-list -->
+    </div>
+    <!--// .season-novelties -->
+    <!-- .recommend -->
+    <div class="recommend catalog-block">
+        <div class="view-all"><a href="/catalog/">Смотреть весь каталог</a></div>
+        <h2 class="headline">Рекомендуем</h2>
+        <!-- .catalog-list -->
+        <ul class="catalog-list">
+            {% for i in recommend_home %}{% include 'item_short.html' with i=i %}{% endfor %}
+        </ul>
+        <!--// .catalog-list -->
+    </div>
+    <!--// .recommend -->
+    <!-- .txt-block -->
+    <div class="txt-block">
+        <h1>Школьное оборудование</h1>
+        <p>"Природа в школе" –- современная динамично развивающаяся фирма-разработчик, производитель и поставщик учебного оборудования и наглядных пособий, самостоятельно работает с 1998 года. Развивая лучшие традиции учебно-технической промышленности, наша фирма постоянно совершенствует собственное производство, реализует новые идеи, чему способствует опыт работы, высококвалифицированные специалисты и слаженная работа коллектива.</p>
+        <div class="/static/incut">
+            <p>Новые разработки и производство приборов нашей фирмой ориентированы на современные требования системы образования. Производимое ООО "Природа в школе" оборудование сертифицировано в России, имеет технические паспорта. Все материалы, используемые в производстве, разрешены к применению Министерством здравоохранения и прошли физико-механические и санитарно-химические испытания.</p>
+        </div>
+        <p>Мы работаем в тесном сотрудничестве с ведущими поставщиками школьного оборудования в России, что позволяет нам удовлетворять запросы на поставки самого широкого ассортимента учебных приборов, оборудования, принадлежностей, наглядных пособий, техники, учебной мебели в кратчайшие сроки и по низким ценам. Осуществляем доставку во все регионы России. Имеем опыт комплектации школ "под ключ".</p>
+    </div>
+    <!--// .txt-block -->
+{% endblock %}
