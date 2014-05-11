@@ -4,41 +4,30 @@
 
 {% load thumbnail %}
 
-{% block breadcrumb %}
-    <a href="" class="no">Новости</a>
-{% endblock %}
-
 {% block content %}
-    <div class="sep"></div> <!--sep-->
-
-    <div class="news">
-        {% for n in news %}
-            <a href="/news/{{ n.slug }}/">
-                <div class="nb">
-                    {% thumbnail n.image "300" as im %}
-                        <img src="{{ im.url }}" />
-                    {% endthumbnail %}
-                    
-                    <h2>{{ n.name }}</h2>
-                    <p>{{ n.text|removetags:"div p"|slice:":200" }}...</p>
-                </div> <!--nb-->
-            </a>
-        {% endfor %}
-
-    </div> <!--news-->
-
-    {% if need_pagination %}
-        <div class="inpgw">
-            {% if news.has_previous %}
-                <a href="{{ get_request }}?page={{ news.previous_page_number }}" class='transparent'><img src="/static/images/pl.png" /></a>
-            {% endif %}
-            {% for p in page_range %}
-                <a href="{{ get_request }}?page={{ p }}" class='transparent{% if p == news.number %} active{% endif %}'>{{ p }}</a>
+    
+      <!-- .highlighted -->
+      <div class="highlighted">
+        <!-- .holder -->
+        <div class="holder">
+          <!-- .breadcrumbs -->
+          <ul class="breadcrumbs">
+            <li><a href="/">Главная</a></li>
+            <li>Новости</li>
+          </ul>
+          <!--// .breadcrumbs -->
+            {% for n in news %}
+            
+                <div class="txt-block dbl-border">
+                    <a href="/news/{{ n.slug }}/"><h1 class="headline">{{ n.name }}</h1></a>
+                    {% if n.image %}<a href="/news/{{ n.slug }}/"><img src="/media/{{ n.image }}" alt="{{ n.name }}" width="785"></a>{% endif %}
+                    <p>{{ n.text|removetags:"div p"|truncatechars:1710 }}</p>
+                </div>
+            
             {% endfor %}
-            {% if news.has_next %}
-                <a href="{{ get_request }}?page={{ news.next_page_number }}" class='transparent'><img src="/static/images/pr.png" /></a>
-            {% endif %}
-        </div> <!--pgw-->
-    {% endif %}
+        </div>
+        <!--// .holder -->
+      </div>
+      <!--// .highlighted -->
     
 {% endblock %}

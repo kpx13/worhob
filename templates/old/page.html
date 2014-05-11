@@ -6,10 +6,25 @@
     {{ header_content|safe }}
 {% endblock %}
 
-{% block breadcrumb %}
-    <a href="" class="no">{{ title }}</a>
-{% endblock %}
-
 {% block content %}
-    {{ content|safe }}
+
+    <div class="highlighted">
+        <!-- .holder -->
+        <div class="holder">
+          <!-- .breadcrumbs -->
+          <ul class="breadcrumbs">
+            <li><a href="/">Главная</a></li>
+            <li>{{ title }}</li>
+          </ul>
+          <!--// .breadcrumbs -->
+          <h1 class="headline">{{ title }}</h1>
+          <!-- .txt-block -->
+          <div class="txt-block">
+            {{ content|safe }}
+          </div>
+          <!--// .txt-block -->
+        </div>
+        <!--// .holder -->
+      </div>
+      <!--// .highlighted -->
 {% endblock %}
