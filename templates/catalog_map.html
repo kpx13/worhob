@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Каталог{% endblock %}
+
+{% block filter %}
+    {% include 'search.html' %}
+{% endblock %}
+
+{% block content %}
+
+    {% load mptt_tags %}
+    
+    <div class="text-block">
+        <h4><span>Каталог</span></h4>
+        <p>
+        <ul style='margin-left: 20px'>
+        {% for node in categories %}
+            <li>
+                {% if node.is_leaf_node %}
+                    <a href="/category/{{ node.slug }}/">
+                        {{ node.name }}
+                    </a>
+                {% else %}
+                    <a href="/category/{{ node.slug }}/">{{ node.name }}</a>
+                    <ul>
+                    {% for i in node.children.all %}
+                        <li  style='list-style: square; margin-left: 10px;'>
+                            {% if i.is_leaf_node %}
+                                <a href="/category/{{ i.slug }}/">
+                                    {{ i.name }}
+                                </a>
+                            {% else %}
+                                <a href="/category/{{ i.slug }}/">{{ i.name }}</a>
+                                <ul>
+                                    {% for j in i.children.all %}
+                                        <li  style='list-style: square; margin-left: 10px; color: red'>
+                                            <a href="/category/{{ j.slug }}/">
+                                                {{ j.name }}
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+        </p>
+    </div>
+   
+{% endblock %}

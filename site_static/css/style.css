@@ -630,6 +630,7 @@ select::-ms-expand {
     background: #5e5e45;
     border-radius: 4px;
     margin-bottom: 20px;
+    border: none;
 }
 .g-btn{
     color: #fff;
@@ -1023,6 +1024,7 @@ h4 span{
 }
 .tovar-info__block ul{
     display: inline-block;
+    vertical-align: top;
     margin-right: 85px;
 }
 .tovar-info__block ul li{

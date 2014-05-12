@@ -9,16 +9,29 @@ from dashboard import string_with_title
 from django.db.models import Q
 
 
+class Parametr(models.Model):
+    name = models.CharField(max_length=127, verbose_name=u'название')
+    values = models.TextField(default=u'', blank=True, verbose_name=u'возможные значения', 
+                             help_text=u"Введите возможные значения с новой строки. Если значение должен ввести пользователь, то не надо.")
+
+    class Meta:
+        verbose_name = u'параметр'
+        verbose_name_plural = u'параметры'
+        app_label = string_with_title("catalog", u"Каталог")
+        
+    def __unicode__(self):
+        return self.name 
+
 class Category(MPTTModel):
     name = models.CharField(max_length=127, verbose_name=u'название')
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children', verbose_name=u'родительская категория')
+    parametrs = models.ManyToManyField(Parametr, null=True, blank=True, verbose_name=u'параметры')
     order = models.IntegerField(null=True, blank=True, default=0, verbose_name=u'порядок сортировки')
     slug = models.SlugField(max_length=127, verbose_name=u'слаг', unique=True, blank=True, help_text=u'заполнять не нужно')
-    id_1c = models.CharField(max_length=50, unique=True, verbose_name=u'Идентификатор в 1C')
     
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug=pytils.translit.slugify(self.name) + pytils.translit.slugify(self.id_1c)[-3:]
+            self.slug=pytils.translit.slugify(self.name)
         super(Category, self).save(*args, **kwargs)
         if self.order == 0:
             self.order = self.id
@@ -54,7 +67,6 @@ class Category(MPTTModel):
     class Meta:
         verbose_name = u'категория'
         verbose_name_plural = u'категории'
-        ordering=['order']
         app_label = string_with_title("catalog", u"Каталог")
 
     
@@ -74,20 +86,16 @@ class Category(MPTTModel):
     @staticmethod
     def search(query):
         return Category.objects.filter(Q(name__icontains=query))
-    
+
 
 class Item(models.Model):
     category = models.ForeignKey(Category, verbose_name=u'категория', related_name='items')
     name = models.CharField(max_length=512, verbose_name=u'название')
     art = models.CharField(max_length=50, verbose_name=u'артикул')
     price = models.FloatField(verbose_name=u'цена')
-    price_old = models.FloatField(blank=True, null=True, verbose_name=u'старая цена (для акций)')
-    description = RichTextField(default=u'', blank=True, verbose_name=u'описание вверху')
-    description_bottom = RichTextField(default=u'', blank=True, verbose_name=u'описание внизу')
-    image = models.ImageField(upload_to='uploads/items', max_length=256, blank=True, verbose_name=u'изображение')
+    description = RichTextField(default=u'', blank=True, verbose_name=u'описание')
     order = models.IntegerField(null=True, blank=True, verbose_name=u'порядок сортировки')
-    novelty_home = models.BooleanField(blank=True, default=False, verbose_name=u'показывать на главной как новинку')
-    recommend_home = models.BooleanField(blank=True, default=False, verbose_name=u'показывать на главной как рекомендуем')
+    at_home = models.BooleanField(blank=True, default=False, verbose_name=u'показывать на главной')
     slug = models.SlugField(max_length=128, verbose_name=u'слаг', unique=True, blank=True, help_text=u'заполнять не нужно')
     date = models.DateTimeField(default=datetime.datetime.now, verbose_name=u'дата добавления')
     
@@ -142,7 +150,7 @@ class Item(models.Model):
     def __unicode__(self):
         return self.name
 
-"""
+
 class Image(models.Model):
     item = models.ForeignKey(Item, verbose_name=u'товар', related_name='image')
     image = models.ImageField(upload_to='uploads/items', max_length=256, blank=True, verbose_name=u'изображение')
@@ -163,5 +171,17 @@ class Image(models.Model):
         
     def __unicode__(self):
         return str(self.id) 
-    
-"""
+
+
+
+class ParametrValue(models.Model):
+    item = models.ForeignKey(Item, verbose_name=u'товар', related_name='parametr')
+    parametr = models.ForeignKey(Parametr, verbose_name=u'параметр')
+    value = models.CharField(max_length=128, verbose_name=u'значение')
+
+    class Meta:
+        verbose_name = u'значение параметра'
+        verbose_name_plural = u'значения параметров'
+        app_label = string_with_title("catalog", u"Каталог")
+        
+

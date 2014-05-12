@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ category.name }}{% endblock %}
+
+{% block filter %}
+    {% include 'filter.html' %}
+{% endblock %}
+
+{% block content %}
+
+
+    {% if items %}
+        <div class="catalog">
+            {% for i in items %}
+                {% include 'item_short.html' with i=i %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <h3>В этой категории нет товаров.</h3>
+    {% endif %}
+    
+{% endblock %}

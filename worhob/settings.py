@@ -10,7 +10,8 @@ ADMINS = (
 
 MANAGERS = ADMINS
 PROJECT_ROOT = abspath(join(dirname(__file__), "../"))
-LOGIN_URL = '/login'
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'
 
 DATE_FORMAT = '%d.%m.%Y'
 DATETIME_FORMAT = '%d.%m.%Y'
@@ -105,6 +106,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'sorl.thumbnail',
     'livesettings',
+    'registration',
     'mptt',
     
     'catalog',
@@ -166,6 +168,7 @@ EMAIL_HOST_PASSWORD = 'noreply13'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+ACCOUNT_ACTIVATION_DAYS = 2
 
 try:
     from dev import *

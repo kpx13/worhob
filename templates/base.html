@@ -73,8 +73,13 @@
         <div class="header__info">
             <div class="header__enter">
                 <img class="header__login-icon" src="/static/img/login-icon.png"/>
-                <a class="header__enter__login" data-source="#popup_login" href="#">Логин </a> |
-                <a class="header__enter__reg" data-source="#popup_reg" href="#">Регистрация</a>
+                    {% if user.is_authenticated %}
+                        <a href="/lk/">Личный кабинет</a> |
+                        <a href="/accounts/logout/">Выход</a>
+                    {% else %}
+                        <a href="/accounts/login/">Вход</a> |
+                        <a href="/accounts/register/">Регистрация</a>
+                    {% endif %}
             </div>
             <div class="header__phone"><span class="header__phone__code">+7 (495)</span> 555-55-55</div>
             <a href="#" class="header__search">Расширенный поиск</a>
@@ -87,111 +92,12 @@
             <a href="/oplata-i-dostavka/" class="header__nav__i {% if 'oplata' in request_url %}active{% endif %}">Оплата и доставка </a>
             <a href="/kontaktyi/" class="header__nav__i {% if 'kontaktyi' in request_url %}active{% endif %}">Контакты </a>
         </nav>
-        <div class="header__tags">
-            <ul>
-                <li><a href="#">Товары для рыбалки</a></li>
-                <li><a href="#">Товары для рыбалки</a></li>
-                <li><a href="#">Капканы, самоловы, кротоловки</a></li>
-                <li><a href="#">Одежда и обувь</a></li>
-            </ul>
-            <ul>
-                <li><a href="#">Сигнальные присполобления</a></li>
-                <li><a href="#">Сувениры и подарки</a></li>
-                <li><a href="#">Арбалеты, луки, рагатки</a></li>
-                <li><a href="#">Кейсы, ящики, боксы</a></li>
-            </ul>
-            <ul>
-                <li><a href="#">Мангалы, коптильни, котлы
-                </a></li>
-                <li><a href="#">Пневматика</a></li>
-                <li><a href="#">Травматика</a></li>
-                <li><a href="#">Чехлы, кейсы</a></li>
-            </ul>
-            <ul>
-                <li><a href="#">Манки для охоты</a></li>
-                <li><a href="#">Чучела для охоты</a></li>
-                <li><a href="#">Засидки, маскировочные сети
-                </a></li>
-                <li><a href="#">Лыжи и комплектующие</a></li>
-            </ul>
-            <ul>
-                <li><a href="#">Приманки и прикормки</a></li>
-                <li><a href="#">Уход за оружием</a></li>
-                <li><a href="#">Патроны, гильзы, пули</a></li>
-                <li><a href="#">Запчасти и тюнинг оружия</a></li>
-                <li><a href="#">Фонари</a></li>
-            </ul>
-            <ul>
-                <li><a href="#">Ножи</a></li>
-                <li><a href="#">Сошки
-                </a></li>
-                <li><a href="#">Книги
-                </a></li>
-                <li><a href="#">Лодки</a></li>
-                <li><a href="#">Ледорубы</a></li>
-            </ul>
-        </div>
+        
+        {% include 'catalog_menu.html' %}
     </header>
-    <div class="search-wrp">
-        <div class="search-switch"></div>
-
-
-        <div class="search__block _1">
-            <div class="search__title"> Быстрый поиск по цене:</div>
-
-            <p>
-
-                <input type="text" id="amount"/>
-            </p>
-
-            <div id="slider-range"></div>
-        </div>
-        <div class="search__block-items">
-            <div class="search__block">
-                <div class="search__title"> Поиск по производителю:</div>
-                <input type="text"/>
-            </div>
-            <div class="search__block">
-                <div class="search__title"> Поиск по назначению:</div>
-                <div class="search__block__select">
-                    <select name="" id="select2">
-                        <option value="">Все позиции</option>
-                        <option value="">Позиция1</option>
-                        <option value="">Позиция2</option>
-                        <option value="">Позиция3</option>
-                        <option value="">Позиция4</option>
-                    </select>
-                </div>
-            </div>
-            <div class="search__block-items__hidden">
-                <div class="search__block">
-                    <div class="search__title"> Поиск по производителю:</div>
-                    <div class="search__block__select">
-                        <select name="" id="select3">
-                            <option value="">Все производители</option>
-                            <option value="">Производитель1</option>
-                            <option value="">Производитель2</option>
-                            <option value="">Производитель3</option>
-                            <option value="">Производитель4</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="search__block">
-                    <div class="search__title"> Поиск по назначению:</div>
-                    <div class="search__block__select">
-                        <select name="" id="select4">
-                            <option value="">Все позиции</option>
-                            <option value="">Позиция1</option>
-                            <option value="">Позиция2</option>
-                            <option value="">Позиция3</option>
-                            <option value="">Позиция4</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <a class="search__btn" href="#"> Найти </a>
-    </div>
+    {% block filter %}
+        {% include 'search.html' %}
+    {% endblock %}
     
     <div class="content">
         {% block content %}

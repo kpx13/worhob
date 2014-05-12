@@ -13,7 +13,7 @@
         <div class="content__slider">
             {% for s in slideshow %}
                 
-                <div class="content__slider__i {% if forloop.first %} active{% endif %}e">
+                <div class="content__slider__i {% if forloop.first %} active{% endif %}">
                     <h3>{{ s.name }}</h3>
                     {% if s.href %}<a href='{{ s.href }}'>{% endif %}
                     <img src="/media/{{ s.image }}" alt=""/>

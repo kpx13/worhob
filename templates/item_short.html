@@ -1,0 +1,19 @@
+{% load thumbnail %}
+<div class="catalog__item">
+    <div class="catalog__item__img">
+        <div class="catalog__item__img-wrp">
+            {% thumbnail i.image.all.0.image "150" as im %}
+                <a href="/item/{{ i.slug }}/"><img src="{{ im.url }}" alt="{{ i.name }}"></a>
+            {% endthumbnail %}
+        </div>
+    </div>
+    <h4 class="catalog__item__title"><a href="/item/{{ i.slug }}/">{{ i.name }}</a></h4>
+
+    <div class="catalog__item__descr">
+        {{ i.description|removetags:"p span img"|truncatechars:90 }}
+    </div>
+    <div class="catalog__item__price-wrp">
+        <span class="catalog__item__price">{{ i.price|floatformat:"0" }} р.</span>
+        <a class="addToCart" href="/item/{{ i.slug }}/"></a>
+    </div>
+</div>

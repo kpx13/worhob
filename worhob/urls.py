@@ -21,7 +21,6 @@ urlpatterns = patterns('',
 
     url(r'^search/$', views.search),
     url(r'^$' , views.home_page),
-    url(r'^register/$' , views.register),
     url(r'^lk/$' , views.lk),
     url(r'^cart/$' , views.cart),
     url(r'^order/$' , views.order),

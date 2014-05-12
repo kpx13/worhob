@@ -1,0 +1,23 @@
+    <form action="/search/" method='post'>
+        <div class="search-wrp">
+            <div class="search__block _1">
+                <div class="search__title"> Искать в категории:</div>
+                    <div class="search__block__select">
+                        <select name="" id="select2">
+                            <option value="">Все категории</option>
+                            {% for node in categories %}
+                                <option value="{{ node.id }}">{{ node.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+            </div>
+            <div class="search__block-items">
+                <div class="search__block" style=''>
+                    <div class="search__title">Запрос:</div>
+                    <input type="text" style='width: 500px;' name='q' value='{{ q }}'/>
+                </div>
+            </div>
+            <button class="search__btn" href="#"> Найти </button>
+        </div>
+        {% csrf_token %}
+    </form>

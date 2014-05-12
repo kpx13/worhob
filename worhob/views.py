@@ -27,7 +27,7 @@ def get_common_context(request):
     c = {}
     c['request_url'] = request.path
     c['user'] = request.user
-    c['categories'] = Category.objects.filter(parent=None).extra(order_by = ['id'])
+    c['categories'] = Category.objects.filter(parent=None).extra(order_by = ['order'])
     c['news_recent'] = NewsItem.objects.all()[0:3] 
     
     if request.user.is_authenticated():
@@ -56,7 +56,7 @@ def home_page(request):
     reset_catalog(request)
     c['request_url'] = 'home'
     c['slideshow'] = Slider.objects.all()
-    c['novelty_home'] = Item.objects.filter(novelty_home=True)
+    c['novelty_home'] = Item.objects.filter(at_home=True)
     c.update(Page.get_page_by_slug('home'))
     return render_to_response('home.html', c, context_instance=RequestContext(request))
 
@@ -234,64 +234,6 @@ def other_page(request, page_name):
         return render_to_response('page.html', c, context_instance=RequestContext(request))
     except:
         raise Http404()
-
-def register(request):
-    c = get_common_context(request)
-    
-    auth_form = AuthenticationForm()
-    register_form = RegisterForm()
-    c['auth_form'] = auth_form
-    c['register_form'] = register_form
-    if request.method == "POST":
-        if request.POST['action'] == 'auth':
-            auth_form = AuthenticationForm(request.POST)
-            if auth_form.is_valid():
-                pass
-            username = request.POST.get('username', '')
-            password = request.POST.get('password', '')
-            user = auth.authenticate(username=username, password=password)
-            if user is not None:
-                if user.is_active:
-                    auth.login(request, user)
-                    if 'is_order' in request.session:
-                        del request.session['is_order']
-                        return HttpResponseRedirect('/order/2/')
-                    return HttpResponseRedirect('/')
-                else:
-                    c['auth_error'] = u'Ваш аккаунт не активирован.'
-                    
-            else:
-                c['auth_error'] = u'Неверный логин или пароль.'
-            c['auth_form'] = auth_form
-        elif request.POST['action'] == 'register':
-            from django.forms.util import ErrorList
-            
-            register_form = RegisterForm(request.POST)
-            if register_form.is_valid():
-                p1 = register_form.data.get('password_1')
-                p2 = register_form.data.get('password_2')
-                error = False
-                if p1 != p2:
-                    register_form._errors["password_2"] = ErrorList([u'Пароли не совпадают.'])
-                    error = True
-                if len(User.objects.filter(username=register_form.data.get('email'))):
-                    register_form._errors["email"] = ErrorList([u'Такой емейл уже зарегистрирован.'])
-                    error = True
-                if not error:
-                    u = User(username=register_form.data.get('email'), email=register_form.data.get('email'))
-                    u.set_password(register_form.data.get('password_1'))
-                    u.save()
-                    p = u.get_profile()
-                    p.fio = register_form.data.get('fio')
-                    p.is_legal = bool(register_form.data.get('is_legal'))
-                    p.save()
-                    user = auth.authenticate(username=register_form.data.get('email'), password=register_form.data.get('password_1'))
-                    auth.login(request, user)
-                    return HttpResponseRedirect('/')
-            c['register_form'] = register_form
-                
-    return render_to_response('register.html', c, context_instance=RequestContext(request))
-
 
 def search(request):
     c = get_common_context(request)
