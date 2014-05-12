@@ -6,5 +6,5 @@ django-ckeditor==4.0.2
 sorl-thumbnail
 django-keyedcache
 django-admin-tools
-django-livesettings
+django-livesettings==1.4-12
 django-mptt

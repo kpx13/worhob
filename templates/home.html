@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+    <div class="content__left">
+        <h2>Интернет-магазин <span>Мир  Увлечений</span></h2>
+
+        {{ content|safe }}
+    </div>
+
+    <div class="content__slider-wrp">
+        <div class="content__slider">
+            {% for s in slideshow %}
+                
+                <div class="content__slider__i {% if forloop.first %} active{% endif %}e">
+                    <h3>{{ s.name }}</h3>
+                    {% if s.href %}<a href='{{ s.href }}'>{% endif %}
+                    <img src="/media/{{ s.image }}" alt=""/>
+                    {% if s.href %}</a>{% endif %}
+                </div>
+                
+
+            {% endfor %}
+        </div>
+        <div class="content__slider__next"></div>
+        <div class="content__slider__prev"></div>
+    </div>
+
+
+    <div class="catalog">
+        <div class="catalog__item">
+            <div class="catalog__item__img">
+                <div class="catalog__item__img-wrp">
+                    <img src="/static/img/item1.jpg" alt=""/>
+                </div>
+            </div>
+            <h4 class="catalog__item__title"><a href="#">Пистолет Gletcher APS (пневматический)</a></h4>
+
+            <div class="catalog__item__descr">Gletcher APS копирует известное оружие – автоматический пистолет
+                Стечкина (АПС)
+            </div>
+            <div class="catalog__item__price-wrp">
+                <span class="catalog__item__price">4 800 р.</span>
+                <a class="addToCart" href="#"></a>
+            </div>
+        </div>
+        <div class="catalog__item">
+            <div class="catalog__item__img">
+                <div class="catalog__item__img-wrp">
+                    <img src="/static/img/item2.jpg" alt=""/>
+                </div>
+            </div>
+            <h4 class="catalog__item__title"><a href="#">Пистолет Gletcher APS (пневматический)</a></h4>
+
+            <div class="catalog__item__descr">Gletcher APS копирует известное оружие – автоматический пистолет
+                Стечкина (АПС)
+            </div>
+            <div class="catalog__item__price-wrp">
+                <span class="catalog__item__price">4 800 р.</span>
+                <a class="addToCart" href="#"></a>
+            </div>
+        </div>
+        <div class="catalog__item">
+            <div class="catalog__item__img">
+                <div class="catalog__item__img-wrp">
+                    <img src="/static/img/item3.jpg" alt=""/>
+                </div>
+            </div>
+            <h4 class="catalog__item__title"><a href="#">Пистолет Gletcher APS (пневматический)</a></h4>
+
+            <div class="catalog__item__descr">Gletcher APS копирует известное оружие – автоматический пистолет
+                Стечкина (АПС)
+            </div>
+            <div class="catalog__item__price-wrp">
+                <span class="catalog__item__price">4 800 р.</span>
+                <a class="addToCart" href="#"></a>
+            </div>
+        </div>
+        <div class="catalog__item">
+            <div class="catalog__item__img">
+                <div class="catalog__item__img-wrp">
+                    <img src="/static/img/item4.jpg" alt=""/>
+                </div>
+            </div>
+            <h4 class="catalog__item__title"><a href="#">Пистолет Gletcher APS (пневматический)</a></h4>
+
+            <div class="catalog__item__descr">Gletcher APS копирует известное оружие – автоматический пистолет
+                Стечкина (АПС)
+            </div>
+            <div class="catalog__item__price-wrp">
+                <span class="catalog__item__price">4 800 р.</span>
+                <a class="addToCart" href="#"></a>
+            </div>
+        </div>
+        <div class="catalog__item">
+            <div class="catalog__item__img">
+                <div class="catalog__item__img-wrp">
+                    <img src="/static/img/item1.jpg" alt=""/>
+                </div>
+            </div>
+            <h4 class="catalog__item__title"><a href="#">Пистолет Gletcher APS (пневматический)</a></h4>
+
+            <div class="catalog__item__descr">Gletcher APS копирует известное оружие – автоматический пистолет
+                Стечкина (АПС)
+            </div>
+            <div class="catalog__item__price-wrp">
+                <span class="catalog__item__price">4 800 р.</span>
+                <a class="addToCart" href="#"></a>
+            </div>
+        </div>
+        <div class="catalog__item">
+            <div class="catalog__item__img">
+                <div class="catalog__item__img-wrp">
+                    <img src="/static/img/item2.jpg" alt=""/>
+                </div>
+            </div>
+            <h4 class="catalog__item__title"><a href="#">Пистолет Gletcher APS (пневматический)</a></h4>
+
+            <div class="catalog__item__descr">Gletcher APS копирует известное оружие – автоматический пистолет
+                Стечкина (АПС)
+            </div>
+            <div class="catalog__item__price-wrp">
+                <span class="catalog__item__price">4 800 р.</span>
+                <a class="addToCart" href="#"></a>
+            </div>
+        </div>
+        <div class="catalog__item">
+            <div class="catalog__item__img">
+                <div class="catalog__item__img-wrp">
+                    <img src="/static/img/item3.jpg" alt=""/>
+                </div>
+            </div>
+            <h4 class="catalog__item__title"><a href="#">Пистолет Gletcher APS (пневматический)</a></h4>
+
+            <div class="catalog__item__descr">Gletcher APS копирует известное оружие – автоматический пистолет
+                Стечкина (АПС)
+            </div>
+            <div class="catalog__item__price-wrp">
+                <span class="catalog__item__price">4 800 р.</span>
+                <a class="addToCart" href="#"></a>
+            </div>
+        </div>
+        <div class="catalog__item">
+            <div class="catalog__item__img">
+                <div class="catalog__item__img-wrp">
+                    <img src="/static/img/item4.jpg" alt=""/>
+                </div>
+            </div>
+            <h4 class="catalog__item__title"><a href="#">Пистолет Gletcher APS (пневматический)</a></h4>
+
+            <div class="catalog__item__descr">Gletcher APS копирует известное оружие – автоматический пистолет
+                Стечкина (АПС)
+            </div>
+            <div class="catalog__item__price-wrp">
+                <span class="catalog__item__price">4 800 р.</span>
+                <a class="addToCart" href="#"></a>
+            </div>
+        </div>
+
+    </div>
+    {% include 'recent_news_line.html' %}
+{% endblock %}

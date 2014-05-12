@@ -1,0 +1,15 @@
+<div class="news-block">
+    <h5 class="heading"><span>Последние новости</span></h5>
+    <div class="news__items">        
+        {% for n in news_recent %}
+            <div class="news__item">
+                <div class="news__title-wrp">
+                    <span class="news__item__date">{{ n.date|date:"d.m.Y" }} - </span> 
+                    <a href="/news/{{ n.slug }}/" class="news__title">{{ n.name }}</a>
+                </div>
+                <img class="news__item__preview" src="/media/{{ n.image }}" alt="{{ n.name }}" style='max-height: 70px'/>
+                <p class="news__item__descr">{{ n.text|removetags:"p span img"|truncatechars:210 }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html class="lt-ie9 lt-ie8" lang="ru"><![endif]-->
+<!--[if IE 8]>
+<html class="lt-ie9" lang="ru"><![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="ru"><!--<![endif]-->
+<head>
+    <title>World of hobbies | {% block title %}{% endblock %}</title>
+    <meta charset="utf-8"/>
+    <!--[if lt IE 9]>
+    <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="/static/css/style.css"/>
+    <script type="text/javascript" src="/static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-ui-1.10.4.custom.min.js"></script>
+    <script type="text/javascript" src="/static/js/script.js"></script>
+    <script src="/static/js/ui/jquery.ui.core.min.js"></script>
+    <script src="/static/js/ui/jquery.ui.slider.min.js"></script>
+    <script src="/static/js/touch.js"></script>
+</head>
+<body>
+<div class="overlay">
+    <div class="popup-wrp">
+        <div class="popup-close">x</div>
+        <div class="popup" id="popup_reg">
+            <div class="popup-title"> Регистрация на сайте</div>
+            <form action="">
+                <label>Ваш имя на сайте:<input type="text"/></label>
+                <label>Ваш телефон:<input type="text"/></label>
+                <label class="popup-pass">Пароль:<br/><input type="password"/></label>
+                <label class="popup-pass _right">Повторите пароль:<br/><input type="password"/></label>
+                <input type="checkbox" checked hidden="hidden" id="check1"/><label class="popup-check" for="check1"> Я
+                прочитал <a href="#" target="_blank">договор оферты</a> и со всем
+                согласен </label>
+
+                <div class="popup-btn-wrp"><input class="popup-btn" type="submit" value="регистрация"/></div>
+            </form>
+        </div>
+        <div class="popup" id="popup_login">
+            <div class="popup-title"> Вход на сайт</div>
+            <form action="">
+                <label>Ваш имя на сайте:<input type="text"/></label>
+                <label>Ваш пароль:<input type="password"/></label>
+                <input type="checkbox" checked hidden="hidden" id="check2"/> <label class="popup-check" for="check2">Запомнить
+                меня на сайте</label>
+
+                <div class="popup-btn-wrp"><input class="popup-btn" type="submit" value="ВОЙТИ"/></div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="bg"></div>
+<div class="cart-side-layout">
+    <div class="cart-side-wrp">
+        <div class="cart-side">
+            <p>В корзине</p>
+
+            <p class="cart-side__red"><span class="cart-side__items-amount">1 </span></p>
+
+            <p>на сумму </p>
+
+            <p class="cart-side__red"><span class="cart-side__items-sum">12600 </span> руб.</p>
+            <a href="#" class="cart-side__btn g-btn">Купить</a>
+        </div>
+    </div>
+</div>
+<div class="wrapper">
+    <header class="header">
+        <h1 class="header__heading">Мир увлечений World of Hobbies
+        </h1>
+
+        <div class="header__info">
+            <div class="header__enter">
+                <img class="header__login-icon" src="/static/img/login-icon.png"/>
+                <a class="header__enter__login" data-source="#popup_login" href="#">Логин </a> |
+                <a class="header__enter__reg" data-source="#popup_reg" href="#">Регистрация</a>
+            </div>
+            <div class="header__phone"><span class="header__phone__code">+7 (495)</span> 555-55-55</div>
+            <a href="#" class="header__search">Расширенный поиск</a>
+        </div>
+        <nav class="header__nav">
+            <a href="/" class="header__nav__i {% if 'home' in request_url %}active{% endif %}">Главная </a>
+            <a href="/catalog/" class="header__nav__i {% if 'catalog' in request_url %}active{% endif %}">Каталог </a>
+            <a href="/uslugi/" class="header__nav__i {% if 'uslugi' in request_url %}active{% endif %}"> Услуги </a>
+            <a href="/partneryi/" class="header__nav__i {% if 'partneryi' in request_url %}active{% endif %}">Партнеры </a>
+            <a href="/oplata-i-dostavka/" class="header__nav__i {% if 'oplata' in request_url %}active{% endif %}">Оплата и доставка </a>
+            <a href="/kontaktyi/" class="header__nav__i {% if 'kontaktyi' in request_url %}active{% endif %}">Контакты </a>
+        </nav>
+        <div class="header__tags">
+            <ul>
+                <li><a href="#">Товары для рыбалки</a></li>
+                <li><a href="#">Товары для рыбалки</a></li>
+                <li><a href="#">Капканы, самоловы, кротоловки</a></li>
+                <li><a href="#">Одежда и обувь</a></li>
+            </ul>
+            <ul>
+                <li><a href="#">Сигнальные присполобления</a></li>
+                <li><a href="#">Сувениры и подарки</a></li>
+                <li><a href="#">Арбалеты, луки, рагатки</a></li>
+                <li><a href="#">Кейсы, ящики, боксы</a></li>
+            </ul>
+            <ul>
+                <li><a href="#">Мангалы, коптильни, котлы
+                </a></li>
+                <li><a href="#">Пневматика</a></li>
+                <li><a href="#">Травматика</a></li>
+                <li><a href="#">Чехлы, кейсы</a></li>
+            </ul>
+            <ul>
+                <li><a href="#">Манки для охоты</a></li>
+                <li><a href="#">Чучела для охоты</a></li>
+                <li><a href="#">Засидки, маскировочные сети
+                </a></li>
+                <li><a href="#">Лыжи и комплектующие</a></li>
+            </ul>
+            <ul>
+                <li><a href="#">Приманки и прикормки</a></li>
+                <li><a href="#">Уход за оружием</a></li>
+                <li><a href="#">Патроны, гильзы, пули</a></li>
+                <li><a href="#">Запчасти и тюнинг оружия</a></li>
+                <li><a href="#">Фонари</a></li>
+            </ul>
+            <ul>
+                <li><a href="#">Ножи</a></li>
+                <li><a href="#">Сошки
+                </a></li>
+                <li><a href="#">Книги
+                </a></li>
+                <li><a href="#">Лодки</a></li>
+                <li><a href="#">Ледорубы</a></li>
+            </ul>
+        </div>
+    </header>
+    <div class="search-wrp">
+        <div class="search-switch"></div>
+
+
+        <div class="search__block _1">
+            <div class="search__title"> Быстрый поиск по цене:</div>
+
+            <p>
+
+                <input type="text" id="amount"/>
+            </p>
+
+            <div id="slider-range"></div>
+        </div>
+        <div class="search__block-items">
+            <div class="search__block">
+                <div class="search__title"> Поиск по производителю:</div>
+                <input type="text"/>
+            </div>
+            <div class="search__block">
+                <div class="search__title"> Поиск по назначению:</div>
+                <div class="search__block__select">
+                    <select name="" id="select2">
+                        <option value="">Все позиции</option>
+                        <option value="">Позиция1</option>
+                        <option value="">Позиция2</option>
+                        <option value="">Позиция3</option>
+                        <option value="">Позиция4</option>
+                    </select>
+                </div>
+            </div>
+            <div class="search__block-items__hidden">
+                <div class="search__block">
+                    <div class="search__title"> Поиск по производителю:</div>
+                    <div class="search__block__select">
+                        <select name="" id="select3">
+                            <option value="">Все производители</option>
+                            <option value="">Производитель1</option>
+                            <option value="">Производитель2</option>
+                            <option value="">Производитель3</option>
+                            <option value="">Производитель4</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="search__block">
+                    <div class="search__title"> Поиск по назначению:</div>
+                    <div class="search__block__select">
+                        <select name="" id="select4">
+                            <option value="">Все позиции</option>
+                            <option value="">Позиция1</option>
+                            <option value="">Позиция2</option>
+                            <option value="">Позиция3</option>
+                            <option value="">Позиция4</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="search__btn" href="#"> Найти </a>
+    </div>
+    
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer class="footer">
+        <a href="#" class="footer__homelink"> <img class="footer_logo" src="/static/img/logo-footer.png" alt=""/></a>
+
+        <div class="footer_block _1">
+            <ul>
+                <li><a href="#">Товары для рыбалки</a></li>
+                <li><a href="#">Товары для туризма</a></li>
+                <li><a href="#">Капканы, самоловы, кротоловки</a></li>
+                <li><a href="#">Одежда и обувь</a></li>
+                <li><a href="#">Сигнальные присполобления</a></li>
+                <li><a href="#">Сувениры и подарки</a></li>
+                <li><a href="#">Арбалеты, луки, рагатки</a></li>
+                <li><a href="#">Кейсы, ящики, боксы</a></li>
+                <li><a href="#">Мангалы, коптильни, котлы</a></li>
+            </ul>
+        </div>
+
+        <div class="footer_block _2">
+            <ul>
+                <li><a href="#">Пневматика</a></li>
+                <li><a href="#">Травматика</a></li>
+                <li><a href="#">Чехлы, кейсы</a></li>
+                <li><a href="#">Манки для охоты</a></li>
+                <li><a href="#">
+                    Чучела для охоты</a></li>
+                <li><a href="#">Засидки, маскировочные сети</a></li>
+                <li><a href="#">Лыжи и комплектующие</a></li>
+                <li><a href="#">Приманки и прикормки</a></li>
+                <li><a href="#">Уход за оружием</a></li>
+            </ul>
+        </div>
+
+        <div class="footer_block _3">
+            <ul>
+                <li><a href="#">Патроны, гильзы, пули</a></li>
+                <li><a href="#">Запчасти и тюнинг оружия</a></li>
+                <li><a href="#">Фонари</a></li>
+                <li><a href="#">Ножи</a></li>
+                <li><a href="#">Сошки</a></li>
+                <li><a href="#">Книги</a></li>
+                <li><a href="#">Лодки</a></li>
+                <li><a href="#">Ледорубы</a></li>
+            </ul>
+        </div>
+        <div class="footer_block footer_block__info">
+            <div class="footer_block__address">
+                <p>Москва, </p>
+
+                <p> ул. Название, д. 55 </p>
+
+                <p> Тел.: +7 (495) 555-55-55 </p>
+                <a href="mailto:info@sitename.ru">info@sitename.ru</a>
+            </div>
+            <div class="footer_block__map">
+                <a href="">Как нас найти</a>
+
+                <p>(Схема проезда)</p>
+            </div>
+            <div class="footer_block__soc">
+                <a href="#" class="vk"></a>
+                <a href="#" class="odn"></a>
+                <a href="#" class="fb"></a>
+                <a href="#" class="tw"></a>
+            </div>
+    </footer>
+</div>
+</body>
+</html>

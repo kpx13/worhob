@@ -28,7 +28,7 @@ def get_common_context(request):
     c['request_url'] = request.path
     c['user'] = request.user
     c['categories'] = Category.objects.filter(parent=None).extra(order_by = ['id'])
-    c['news_left'] = NewsItem.objects.all()[0:3] 
+    c['news_recent'] = NewsItem.objects.all()[0:3] 
     
     if request.user.is_authenticated():
         c['cart_working'] = Cart
@@ -57,7 +57,7 @@ def home_page(request):
     c['request_url'] = 'home'
     c['slideshow'] = Slider.objects.all()
     c['novelty_home'] = Item.objects.filter(novelty_home=True)
-    c['recommend_home'] = Item.objects.filter(recommend_home=True)
+    c.update(Page.get_page_by_slug('home'))
     return render_to_response('home.html', c, context_instance=RequestContext(request))
 
 def news(request, slug=None):
@@ -83,8 +83,8 @@ def news(request, slug=None):
         c['news'] = items
         return render_to_response('news.html', c, context_instance=RequestContext(request))
     else:
-        c['item'] = NewsItem.get_by_slug(slug)
-        return render_to_response('news_item.html', c, context_instance=RequestContext(request))
+        c['new'] = NewsItem.get_by_slug(slug)
+        return render_to_response('new.html', c, context_instance=RequestContext(request))
 
 
 def category(request, slug):
@@ -307,10 +307,3 @@ def search(request):
 def sitemap(request):
     c = get_common_context(request)
     return render_to_response('sitemap.html', c, context_instance=RequestContext(request))
-
-
-def parse(request):
-    c = get_common_context(request)
-    from catalog.parse import go
-    go('1c_db_2.xml')
-    return render_to_response('catalog_map.html', c, context_instance=RequestContext(request))

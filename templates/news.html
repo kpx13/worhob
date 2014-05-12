@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Новости{% endblock %}
+
+{% block content %}
+    {% for n in news %}
+        <div class="text-block">
+            <div class="heading"><span>{{ n.name }}</span></div>
+            {% if n.image %}
+                <a href='/news/{{ n.slug }}/'><img src="/media/{{ n.image }}" alt="{{ n.name }}" style='float: left'/></a>
+            {% endif %}
+            <p>{{ n.text|removetags:"p span img"|truncatechars:510 }}</p>
+            <i class='news-date'>{{ n.date }}</i><br />
+            <a href='/news/{{ n.slug }}/'>Подробнее >></a>
+        </div>
+    {% endfor %}
+{% endblock %}

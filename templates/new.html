@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ new.name }}{% endblock %}
+
+{% block content %}
+
+    <div class="text-block">
+        <h4><a href='/news/' style='color: inherit'>Новости</a> - <span>{{ new.name }}</span></h4>
+        {{ new.text|safe }}
+    </div>
+    
+    {% include 'recent_news_line.html' %}
+    
+{% endblock %}
