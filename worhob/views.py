@@ -28,7 +28,13 @@ def get_common_context(request):
     c['request_url'] = request.path
     c['user'] = request.user
     c['categories'] = Category.objects.filter(parent=None).extra(order_by = ['order'])
-    c['news_recent'] = NewsItem.objects.all()[0:3] 
+    c['categories_all'] = Category.objects.all()
+    c['categories_all_count_1'] = Category.objects.all().count() / 3
+    c['categories_all_count_2'] = Category.objects.all().count() * 2 / 3
+    c['categories_all_count_3'] = Category.objects.all().count()
+    c['news_recent'] = NewsItem.objects.all()[0:3]
+    c['price_from'] = 0
+    c['price_to'] = 50000 
     
     if request.user.is_authenticated():
         c['cart_working'] = Cart
@@ -56,7 +62,7 @@ def home_page(request):
     reset_catalog(request)
     c['request_url'] = 'home'
     c['slideshow'] = Slider.objects.all()
-    c['novelty_home'] = Item.objects.filter(at_home=True)
+    c['items_at_home'] = Item.objects.filter(at_home=True)
     c.update(Page.get_page_by_slug('home'))
     return render_to_response('home.html', c, context_instance=RequestContext(request))
 
@@ -92,6 +98,29 @@ def category(request, slug):
     if slug:
         c['category'] = Category.get_by_slug(slug)
         items = Item.objects.filter(category__in=c['category'].get_descendants(include_self=True))
+    else:
+        items = Item.objects.all()
+    
+    c['items'] = items
+    return render_to_response('catalog.html', c, context_instance=RequestContext(request))
+
+def category_filter(request, slug):
+    c = get_common_context(request)
+    if slug:
+        c['category'] = Category.get_by_slug(slug)
+        items = Item.objects.filter(category__in=c['category'].get_descendants(include_self=True))
+        for k in request.POST.keys():
+            if k.startswith('parametr_'):
+                p_id = k[9:]
+                p_value = request.POST[k]
+                if p_id == 'price_from' and p_value:
+                    items = items.filter(price__gte=float(p_value))
+                    c['price_from'] = int(p_value)
+                elif p_id == 'price_to' and p_value:
+                    items = items.filter(price__lte=float(p_value))
+                    c['price_to'] = int(p_value)
+                else:
+                    items = Item.filter_by_parametr(items, p_id, p_value)
     else:
         items = Item.objects.all()
     

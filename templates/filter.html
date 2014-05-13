@@ -1,60 +1,87 @@
+<script>
+    $(function () {
+        $("#slider-range").slider({
+            range: true,
+            min: 0,
+            max: 50000,
+            values: [ {{ price_from }}, {{ price_to }} ],
+            slide: function (event, ui) {
+                $(".ui-slider-handle .ui-slider-handle__in").html(ui.values[ 1 ] + " р.");
+                $(".ui-slider-handle:first .ui-slider-handle__in").html(ui.values[ 0 ] + " р.");
+                
+                $("input#parametr_price_from").val(ui.values[ 0 ]);
+                $("input#parametr_price_to").val(ui.values[ 1 ]);
+                console.log(ui.values[ 0 ]);
+                console.log(ui.values[ 1 ]);
+            }
+        });
+        
+        var output = $("<span class='ui-slider-handle__in'></span>");
+        output.appendTo(".ui-slider-handle");
+        $(".ui-slider-handle .ui-slider-handle__in").html($("#slider-range").slider("values", 1) + " р.");
+        $(".ui-slider-handle:first .ui-slider-handle__in").html($("#slider-range").slider("values", 0) + " р.");
+
+        $(".header__enter a").click(function () {
+            var source = $(this).attr("data-source");
+            $(".popup").filter(source).show();
+            $(".overlay").fadeIn();
+            e.stopPropagation();
+        });
+
+        $(".popup-close").click(function () {
+            $(".popup").fadeOut();
+            $(".overlay").fadeOut();
+        });
+
+        $(".header__nav__i").click(function () {
+            $(".header__nav__i").removeClass("active");
+            $(this).addClass("active");
+        })
+
+        $(".tovar-preview").click(function () {
+            var index = $(this).index();
+            $(".tovar-preview").removeClass("active");
+            var item = $(".tovar-bigImg__i");
+            item.fadeOut().removeClass("active");
+            item.eq(index).addClass("active").fadeIn();
+            $(this).addClass("active");
+        });
+    });
+</script>
+
+<form action="/filter/{{ category.slug }}/" method='post'>
     <div class="search-wrp">
-        <div class="search-switch"></div>
-
-
+        {% if category.parametrs.all.count > 2 %}
+            <div class="search-switch"></div>
+        {% endif %}
+        
         <div class="search__block _1">
-            <div class="search__title"> Быстрый поиск по цене:</div>
-
+            <div class="search__title"> По цене:</div>
             <p>
-
-                <input type="text" id="amount"/>
+                <input type="text" id="amount" />
             </p>
-
             <div id="slider-range"></div>
+            <input type="hidden" id="parametr_price_from" name='parametr_price_from' value=''/>
+            <input type="hidden" id="parametr_price_to" name='parametr_price_to' value=''/>
         </div>
+        
         <div class="search__block-items">
-            <div class="search__block">
-                <div class="search__title"> Поиск по производителю:</div>
-                <input type="text"/>
-            </div>
-            <div class="search__block">
-                <div class="search__title"> Поиск по назначению:</div>
-                <div class="search__block__select">
-                    <select name="" id="select2">
-                        <option value="">Все позиции</option>
-                        <option value="">Позиция1</option>
-                        <option value="">Позиция2</option>
-                        <option value="">Позиция3</option>
-                        <option value="">Позиция4</option>
-                    </select>
+            {% include 'filter_par.html' with par=category.parametrs.all.0 %}
+            {% include 'filter_par.html' with par=category.parametrs.all.1 %}
+           
+           
+            {% if category.parametrs.all.count > 2 %}
+                <div class="search__block-items__hidden">
+                    {% for par in category.parametrs.all %}
+                        {% if forloop.counter > 2 %}
+                            {% include 'filter_par.html' with par=par %}
+                        {% endif %}
+                    {% endfor %}
                 </div>
-            </div>
-            <div class="search__block-items__hidden">
-                <div class="search__block">
-                    <div class="search__title"> Поиск по производителю:</div>
-                    <div class="search__block__select">
-                        <select name="" id="select3">
-                            <option value="">Все производители</option>
-                            <option value="">Производитель1</option>
-                            <option value="">Производитель2</option>
-                            <option value="">Производитель3</option>
-                            <option value="">Производитель4</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="search__block">
-                    <div class="search__title"> Поиск по назначению:</div>
-                    <div class="search__block__select">
-                        <select name="" id="select4">
-                            <option value="">Все позиции</option>
-                            <option value="">Позиция1</option>
-                            <option value="">Позиция2</option>
-                            <option value="">Позиция3</option>
-                            <option value="">Позиция4</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
+            {% endif %}
         </div>
-        <a class="search__btn" href="#"> Найти </a>
+        
+        <button type='submit' class="search__btn"> Найти </button>
     </div>
+    {% csrf_token %}
+</form>

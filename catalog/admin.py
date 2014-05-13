@@ -20,7 +20,7 @@ class CategoryAdmin(admin.ModelAdmin):
     
 class ItemAdmin(admin.ModelAdmin):
     inlines = [ ImageInline, ParametrInline]
-    list_display = ('name', 'art', 'category', 'price', )
+    list_display = ('name', 'art', 'category', 'price', 'at_home')
     search_fields = ['art', 'name']
     list_filter = ('category', )
 

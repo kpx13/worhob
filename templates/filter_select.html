@@ -1,0 +1,11 @@
+<div class="search__block">
+    <div class="search__title">{{ p.name }}:</div>
+    <div class="search__block__select">
+        <select name="parametr_{{ p.id }}" id="select2">
+            <option value=""></option>
+            {% for v in p.get_values %}
+                <option value="{{ v }}">{{ v }}</option>
+            {% endfor %}
+        </select>
+    </div>
+</div>

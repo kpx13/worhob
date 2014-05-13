@@ -1,0 +1,7 @@
+{% if par %}
+    {% if par.values %}
+        {% include 'filter_select.html' with p=par %}
+    {% else %}
+        {% include 'filter_input.html' with p=par %}
+    {% endif %}
+{% endif %}

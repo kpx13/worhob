@@ -13,7 +13,11 @@ class Parametr(models.Model):
     name = models.CharField(max_length=127, verbose_name=u'название')
     values = models.TextField(default=u'', blank=True, verbose_name=u'возможные значения', 
                              help_text=u"Введите возможные значения с новой строки. Если значение должен ввести пользователь, то не надо.")
+    
+    def get_values(self):
+        return [x.strip() for x in self.values.split('\n') if x.strip()]
 
+    
     class Meta:
         verbose_name = u'параметр'
         verbose_name_plural = u'параметры'
@@ -44,6 +48,7 @@ class Category(MPTTModel):
         except:
             return None
         
+
     def breadcrumb(self):
         page = self
         breadcrumbs = []
@@ -113,6 +118,22 @@ class Item(models.Model):
             return Item.objects.get(slug=page_name)
         except:
             return None
+    
+    @staticmethod    
+    def filter_by_parametr(items, p_id, p_value):
+        res = []
+        if not (p_id and p_value):
+            return items
+        try:
+            par = Parametr.objects.get(id=p_id)
+        except:
+            return items
+        for i in items:
+            pv = ParametrValue.objects.filter(item=i, parametr=par)
+            if len(pv) > 0: # есть значение параметра
+                if pv[0].value.strip() == p_value.strip():
+                    res.append(i)
+        return res
 
     @staticmethod
     def get(id_):
@@ -184,4 +205,3 @@ class ParametrValue(models.Model):
         verbose_name_plural = u'значения параметров'
         app_label = string_with_title("catalog", u"Каталог")
         
-

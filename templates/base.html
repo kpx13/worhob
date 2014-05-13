@@ -106,46 +106,38 @@
 
     <footer class="footer">
         <a href="#" class="footer__homelink"> <img class="footer_logo" src="/static/img/logo-footer.png" alt=""/></a>
-
+                
         <div class="footer_block _1">
             <ul>
-                <li><a href="#">Товары для рыбалки</a></li>
-                <li><a href="#">Товары для туризма</a></li>
-                <li><a href="#">Капканы, самоловы, кротоловки</a></li>
-                <li><a href="#">Одежда и обувь</a></li>
-                <li><a href="#">Сигнальные присполобления</a></li>
-                <li><a href="#">Сувениры и подарки</a></li>
-                <li><a href="#">Арбалеты, луки, рагатки</a></li>
-                <li><a href="#">Кейсы, ящики, боксы</a></li>
-                <li><a href="#">Мангалы, коптильни, котлы</a></li>
+                {% for cat in categories_all %}
+                    {% if forloop.counter <= categories_all_count_1 %}
+                        <li><a href="/category/{{ cat.slug }}/">{{ cat.name }}</li>
+                    {% endif %}
+                {% endfor %}
             </ul>
         </div>
 
         <div class="footer_block _2">
             <ul>
-                <li><a href="#">Пневматика</a></li>
-                <li><a href="#">Травматика</a></li>
-                <li><a href="#">Чехлы, кейсы</a></li>
-                <li><a href="#">Манки для охоты</a></li>
-                <li><a href="#">
-                    Чучела для охоты</a></li>
-                <li><a href="#">Засидки, маскировочные сети</a></li>
-                <li><a href="#">Лыжи и комплектующие</a></li>
-                <li><a href="#">Приманки и прикормки</a></li>
-                <li><a href="#">Уход за оружием</a></li>
+                {% for cat in categories_all %}
+                    {% if forloop.counter > categories_all_count_1 %}
+                        {% if forloop.counter <= categories_all_count_2 %}
+                            <li><a href="/category/{{ cat.slug }}/">{{ cat.name }}</li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
             </ul>
         </div>
 
         <div class="footer_block _3">
             <ul>
-                <li><a href="#">Патроны, гильзы, пули</a></li>
-                <li><a href="#">Запчасти и тюнинг оружия</a></li>
-                <li><a href="#">Фонари</a></li>
-                <li><a href="#">Ножи</a></li>
-                <li><a href="#">Сошки</a></li>
-                <li><a href="#">Книги</a></li>
-                <li><a href="#">Лодки</a></li>
-                <li><a href="#">Ледорубы</a></li>
+                {% for cat in categories_all %}
+                    {% if forloop.counter > categories_all_count_2 %}
+                        {% if forloop.counter <= categories_all_count_3 %}
+                            <li><a href="/category/{{ cat.slug }}/">{{ cat.name }}</li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
             </ul>
         </div>
         <div class="footer_block footer_block__info">

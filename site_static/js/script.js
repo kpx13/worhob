@@ -55,50 +55,6 @@ $(function () {
         }
     });
 
-    $("#slider-range").slider({
-        range: true,
-        min: 0,
-        max: 50000,
-        values: [ 5000, 18000 ],
-        slide: function (event, ui) {
-            $(".ui-slider-handle .ui-slider-handle__in").html(ui.values[ 1 ] + " р.");
-            $(".ui-slider-handle:first .ui-slider-handle__in").html(ui.values[ 0 ] + " р.");
-
-        }
-    });
-
-
-    var output = $("<span class='ui-slider-handle__in'></span>");
-    output.appendTo(".ui-slider-handle");
-    $(".ui-slider-handle .ui-slider-handle__in").html($("#slider-range").slider("values", 1) + " р.");
-    $(".ui-slider-handle:first .ui-slider-handle__in").html($("#slider-range").slider("values", 0) + " р.");
-
-    $(".header__enter a").click(function () {
-        var source = $(this).attr("data-source");
-        $(".popup").filter(source).show();
-        $(".overlay").fadeIn();
-        e.stopPropagation();
-    });
-
-    $(".popup-close").click(function () {
-        $(".popup").fadeOut();
-        $(".overlay").fadeOut();
-    });
-
-    $(".header__nav__i").click(function () {
-        $(".header__nav__i").removeClass("active");
-        $(this).addClass("active");
-    })
-
-    $(".tovar-preview").click(function () {
-        var index = $(this).index();
-        $(".tovar-preview").removeClass("active");
-        var item = $(".tovar-bigImg__i");
-        item.fadeOut().removeClass("active");
-        item.eq(index).addClass("active").fadeIn();
-        $(this).addClass("active");
-    });
-
 
     //-----------------Корзина-----------------//
 
