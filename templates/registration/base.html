@@ -21,20 +21,7 @@
 </head>
 <body>
 <div class="bg"></div>
-<div class="cart-side-layout">
-    <div class="cart-side-wrp">
-        <div class="cart-side">
-            <p>В корзине</p>
 
-            <p class="cart-side__red"><span class="cart-side__items-amount">{{ cart_count }} </span></p>
-
-            <p>на сумму </p>
-
-            <p class="cart-side__red"><span class="cart-side__items-sum"> {{ cart_sum|floatformat:"0" }} </span> р.</p>
-            <a href="/cart/" class="cart-side__btn g-btn">Купить</a>
-        </div>
-    </div>
-</div>
 <div class="wrapper">
     <header class="header">
         <h1 class="header__heading">Мир увлечений World of Hobbies
@@ -63,54 +50,18 @@
             <a href="/kontaktyi/" class="header__nav__i {% if 'kontaktyi' in request_url %}active{% endif %}">Контакты </a>
         </nav>
         
-        {% include 'catalog_menu.html' %}
     </header>
-    {% block filter %}
-        {% include 'search.html' %}
-    {% endblock %}
     
     <div class="content">
         {% block content %}
         {% endblock %}
+        <div style='height: 100px'></div>
     </div>
 
     <footer class="footer">
         <a href="/" class="footer__homelink"> <img class="footer_logo" src="/static/img/logo-footer.png" alt=""/></a>
                 
-        <div class="footer_block _1">
-            <ul>
-                {% for cat in categories_all %}
-                    {% if forloop.counter <= categories_all_count_1 %}
-                        <li><a href="/category/{{ cat.slug }}/">{{ cat.name }}</li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-        </div>
-
-        <div class="footer_block _2">
-            <ul>
-                {% for cat in categories_all %}
-                    {% if forloop.counter > categories_all_count_1 %}
-                        {% if forloop.counter <= categories_all_count_2 %}
-                            <li><a href="/category/{{ cat.slug }}/">{{ cat.name }}</li>
-                        {% endif %}
-                    {% endif %}
-                {% endfor %}
-            </ul>
-        </div>
-
-        <div class="footer_block _3">
-            <ul>
-                {% for cat in categories_all %}
-                    {% if forloop.counter > categories_all_count_2 %}
-                        {% if forloop.counter <= categories_all_count_3 %}
-                            <li><a href="/category/{{ cat.slug }}/">{{ cat.name }}</li>
-                        {% endif %}
-                    {% endif %}
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="footer_block footer_block__info">
+        <div class="footer_block">
             <div class="footer_block__address">
                 <p>Москва, </p>
 
@@ -119,11 +70,22 @@
                 <p> Тел.: +7 (495) 555-55-55 </p>
                 <a href="mailto:info@sitename.ru">info@sitename.ru</a>
             </div>
+        </div>
+
+        <div class="footer_block">
             <div class="footer_block__map">
                 <a href="">Как нас найти</a>
 
                 <p>(Схема проезда)</p>
             </div>
+        </div>
+
+        <div class="footer_block">
+            
+        </div>
+        <div class="footer_block footer_block__info">
+            
+            
             <div class="footer_block__soc">
                 <a href="#" class="vk"></a>
                 <a href="#" class="odn"></a>

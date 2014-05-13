@@ -1,15 +1,15 @@
-{% extends "base.html" %}
+{% extends "registration/base.html" %}
 
 {% block content %}
-    <div>
-        <h2>Вход</h2>
+        <h4><span>Вход</span></h4>
         <form method='post'>
             <table class="request">
                 {{ form.as_table }}
-                <tr><td></td><td><input type="submit" value="Вход" /></td></tr>
+                <tr><td></td><td><input type="submit" class="search__btn" value="Войти" /></td></tr>
                 <input type="hidden" name="action" value="login" />
             </table>
             {% csrf_token %}
         </form>
-    </div>
+        
+        <a href='/accounts/password/reset/'>Забыли пароль?</a><br /><br /><br />
 {% endblock %}

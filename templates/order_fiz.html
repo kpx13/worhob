@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}Оформление заказа{% endblock %}
+
+{% block content %}
+    <div class="text-block">
+        <h4><a href='/cart/' style='color: inherit'>Корзина</a> - <span>Оформление заказа</span></h4>
+           
+        <form method='POST' class="col left">
+            <div class="form-row">
+            {% if form.fio.errors %}
+                <div class="form-error">{{ form.fio.errors.0 }}</div>
+            {% endif %}
+            {{ form.fio }}
+            </div>
+            <div class="form-row">
+            {% if form.passport.errors %}
+                <div class="form-error">{{ form.passport.errors.0 }}</div>
+            {% endif %}
+            {{ form.passport }}
+            </div>
+            <div class="form-row">
+            {% if form.address.errors %}
+                <div class="form-error">{{ form.address.errors.0 }}</div>
+            {% endif %}
+            {{ form.address }}
+            </div>
+            <div class="form-row">
+            {% if form.contacts.errors %}
+                <div class="form-error">{{ form.contacts.errors.0 }}</div>
+            {% endif %}
+            {{ form.contacts }}
+            </div>
+            
+            <div class="form-row">
+            {% if orderform.comment.errors %}
+                <div class="form-error">{{ orderform.comment.errors.0 }}</div>
+            {% endif %}
+            {{ orderform.comment }}
+            </div>
+            <br />
+            <hr />
+            <h3>Доставка</h3>
+            {% if orderform.delivery.errors %}
+                <div class="form-error">{{ orderform.delivery.errors.0 }}</div>
+            {% endif %}
+            
+            <label><input type="radio" name="delivery" value="1">Доставка по Москве</label><br />
+            <label><input type="radio" name="delivery" value="2">Доставка до ТК</label><br />
+            <label><input type="radio" name="delivery" value="3">Доставка до двери за пределами Москвы</label><br />
+            <label><input type="radio" name="delivery" value="4">Самовывоз со склада в Москве</label><br />
+            
+            <br />
+            <button type='submit' class="search__btn">Оформить</button>
+            {% csrf_token %}
+            
+            
+            <div style='display: none'>            
+                <label class="_red dist-from-shoulder">Расстояние от плеча{{ form.field1 }}</label>
+                <label class="_red dist-outer">Расстояние по внешнему шву{{ form.field2 }}</label>
+                <label class="_red dist-inner">Расстояние по внутреннему шву{{ form.field3 }}</label>
+                <label class="head-circumference">Обхват головы{{ form.field4 }}</label>
+                <label class="dist-between-shoulders">Расстояние между плечами{{ form.field5 }}</label>
+                <label class="chest-girth">Обхват груди{{ form.field6 }}</label>
+                <label class="waist-size">Объем талии{{ form.field7 }}</label>
+                <label class="size-of-hips">Объем бедер{{ form.field8 }}</label>
+            </div>
+        </form>
+    </div>
+{% endblock %}

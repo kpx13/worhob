@@ -153,6 +153,13 @@ class Order(models.Model):
     def get_sum(self):
         return sum([x.count * x.price for x in OrderContent.get_content(self)])
     
+    @property
+    def sizes_request(self):
+        for oc in OrderContent.get_content(self):
+            if oc.item.sizes_request:
+                return True 
+        return False
+    
     def savecommit(self, *args, **kwargs):
         self.save()
         OrderContent.move_from_cart(self.user, self)

@@ -55,8 +55,16 @@
                 
             </table>
             <div class="tovar-price__block">
+                {% if sizes_request %} 
+                    {% if user.is_authenticated %}
+                        <p>У Вас в корзине присутствует товар, для которого лучше ввести точные размеры <a href='/lk/'>здесь</a>.</p>
+                    {% else %}
+                        <p>У Вас в корзине присутствует товар, для которого лучше ввести точные размеры. 
+                        Для этого необходимо <a href="/accounts/login/">войти</a> или <a href="/accounts/register/">зарегистрироваться</a>.</p>
+                    {% endif %}
+                {% endif %}
                 <div class="tovar-price-wrp">Итого: <span class="tovar-price _sum">{{ cart_sum|floatformat:"0" }} </span><span> р.</span></div>
-                <a href="#" class="tovar-price-btn g-btn">Оформить</a>
+                <a href="/order/" class="tovar-price-btn g-btn">Оформить</a>
             </div>
         {% else %}
             <h2>Ваша корзина пуста.</h2>

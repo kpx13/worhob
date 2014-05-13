@@ -1368,7 +1368,5 @@ h4 span{
 }
 
 
-
-
-
-
+.form-error, .errorlist li
+{ color: red; font-size: small; list-style: none }

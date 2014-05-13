@@ -1,0 +1,1 @@
+[{"pk": 1, "model": "users.userprofile", "fields": {"user": 1, "is_legal": false, "fio": "asdf"}}, {"pk": 2, "model": "users.userprofile", "fields": {"user": 2, "is_legal": false, "fio": ""}}, {"pk": 1, "model": "users.userorderdatafiz", "fields": {"contacts": "47", "user": 1, "passport": "sdf", "address": "4"}}]

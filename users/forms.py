@@ -23,7 +23,7 @@ class OrderDataFizForm(ModelForm):
     class Meta:
         model = UserOrderDataFiz
         exclude = ('user', )
-        fields = ('fio', 'passport', 'address', 'contacts')
+        fields = ('fio', 'passport', 'address', 'contacts', 'field1', 'field2', 'field3', 'field4', 'field5', 'field6', 'field7', 'field8')
     
     fio = fields.CharField(label = u'ФИО', widget=TextInput(attrs={'placeholder': u'ФИО *'}))
     passport = fields.CharField(label = u'Паспортные данные', widget=TextInput(attrs={'placeholder': u'Паспортные данные *'}))

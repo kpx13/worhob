@@ -99,6 +99,7 @@ class Item(models.Model):
     art = models.CharField(max_length=50, verbose_name=u'артикул')
     price = models.FloatField(verbose_name=u'цена')
     description = RichTextField(default=u'', blank=True, verbose_name=u'описание')
+    sizes_request = models.BooleanField(blank=True, default=False, verbose_name=u'запросить точные размеры?')
     order = models.IntegerField(null=True, blank=True, verbose_name=u'порядок сортировки')
     at_home = models.BooleanField(blank=True, default=False, verbose_name=u'показывать на главной')
     slug = models.SlugField(max_length=128, verbose_name=u'слаг', unique=True, blank=True, help_text=u'заполнять не нужно')

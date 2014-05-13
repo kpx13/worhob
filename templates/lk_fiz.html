@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Личный кабинет{% endblock %}
+
+{% block content %}
+<form method='POST'>
+    <div class="text-block">
+        <h4><span>Личный кабинет</span></h4>
+        
+        <h2>Данные для оформления заказа</h2>
+          
+              <div class="form-row">
+                {% if form.fio.errors %}
+                    <div class="form-error">{{ form.fio.errors.0 }}</div>
+                {% endif %}
+                {{ form.fio }}
+              </div>
+              <div class="form-row">
+                {% if form.passport.errors %}
+                    <div class="form-error">{{ form.passport.errors.0 }}</div>
+                {% endif %}
+                {{ form.passport }}
+              </div>
+              <div class="form-row">
+                {% if form.address.errors %}
+                    <div class="form-error">{{ form.address.errors.0 }}</div>
+                {% endif %}
+                {{ form.address }}
+              </div>
+              <div class="form-row">
+                {% if form.contacts.errors %}
+                    <div class="form-error">{{ form.contacts.errors.0 }}</div>
+                {% endif %}
+                {{ form.contacts }}
+              </div>
+              <button type='submit' class="search__btn">Сохранить</button>
+              <br />
+            <a href='/accounts/password/change/'>Сменить пароль</a>
+    </div>
+    
+    
+    <div class="text-block">
+        <div class="heading"><span>Ваши размеры</span></div>
+        
+        <button type='submit' class="search__btn" style='float: right'>Сохранить</button>
+        <div class="measurements">            
+            <label class="_red dist-from-shoulder">Расстояние от плеча{{ form.field1 }}</label>
+            <label class="_red dist-outer">Расстояние по внешнему шву{{ form.field2 }}</label>
+            <label class="_red dist-inner">Расстояние по внутреннему шву{{ form.field3 }}</label>
+            <label class="head-circumference">Обхват головы{{ form.field4 }}</label>
+            <label class="dist-between-shoulders">Расстояние между плечами{{ form.field5 }}</label>
+            <label class="chest-girth">Обхват груди{{ form.field6 }}</label>
+            <label class="waist-size">Объем талии{{ form.field7 }}</label>
+            <label class="size-of-hips">Объем бедер{{ form.field8 }}</label>
+        </div>
+        <button type='submit' class="search__btn" style='float: right'>Сохранить</button>
+
+    </div>
+{% csrf_token %}
+</form>    
+{% endblock %}

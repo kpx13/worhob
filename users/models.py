@@ -53,6 +53,14 @@ class UserOrderDataFiz(models.Model):
     passport = models.CharField(max_length=512, blank=True, verbose_name=u'паспортные данные')
     address = models.CharField(max_length=255, blank=True,verbose_name=u'адрес доставки')
     contacts = models.CharField(max_length=255, blank=True,verbose_name=u'контакты')    
+    field1 = models.CharField(max_length=63, blank=True,verbose_name=u'Расстояние от плеча')
+    field2 = models.CharField(max_length=63, blank=True,verbose_name=u'Расстояние по внешнему шву')
+    field3 = models.CharField(max_length=63, blank=True,verbose_name=u'Расстояние по внутреннему шву')
+    field4 = models.CharField(max_length=63, blank=True,verbose_name=u'Обхват головы')
+    field5 = models.CharField(max_length=63, blank=True,verbose_name=u'Расстояние между плечами')
+    field6 = models.CharField(max_length=63, blank=True,verbose_name=u'Обхват груди')
+    field7 = models.CharField(max_length=63, blank=True,verbose_name=u'Объем талии')
+    field8 = models.CharField(max_length=63, blank=True,verbose_name=u'Объем бедер')
 
     class Meta:
         verbose_name = u'данные для заказа физ лица'

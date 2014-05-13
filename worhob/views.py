@@ -178,6 +178,12 @@ def cart(request):
         c['count'] = 10
     
     items = c['cart_working'].get_content(request.user)
+    
+    c['sizes_request'] = False
+    for oc in items:
+        if oc['item'].sizes_request:
+            c['sizes_request'] = True 
+    
     paginator = Paginator(items, request.session['catalog_cart_count'])
     page = int(request.GET.get('page', '1'))
     try:

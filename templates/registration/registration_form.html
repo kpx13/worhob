@@ -1,18 +1,15 @@
-{% extends "base.html" %}
+{% extends "registration/base.html" %}
 
 {% block content %}
-        
-    <div class="content_in">
-    <div class="recenzii">
-        <h2>Регистрация</h2>
+        <h4><span>Регистрация</span></h4>
+    
         <form method='post'>
             <table class="request">
                 {{ form.as_table }}
-                <tr><td></td><td><input type="submit" value="Зарегистрироваться" /></td></tr>
+                <tr><td></td><td><input type="submit" class="search__btn" value="Зарегистрироваться" /></td></tr>
             </table>
             {% csrf_token %}
             
         </form>
-    </div>
-    </div>
+    
 {% endblock %}

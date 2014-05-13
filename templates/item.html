@@ -41,6 +41,15 @@
                             <li>{{ p.parametr.name }} - <span>{{ p.value }}</span></li>
                             {% if forloop.counter|divisibleby:3 %}</ul><ul>{% endif %}
                         {% endfor %}
+                        
+                        {% if item.sizes_request %}
+                            {% if user.is_authenticated %}
+                                <li>Для заказа данного товара лучше ввести точные размеры <a href='/lk/'>здесь</a>.</li>
+                            {% else %}
+                                <li>Для заказа данного товара лучше ввести точные размеры. 
+                                Для этого необходимо <a href="/accounts/login/">войти</a> или <a href="/accounts/register/">зарегистрироваться</a>.</li>
+                            {% endif %}
+                        {% endif %}
                     </ul>
                 </div>
                 <div class="tovar-price__block">
