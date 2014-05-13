@@ -58,6 +58,7 @@ class CustomIndexDashboard(Dashboard):
                 models=(
                     'catalog.models.Category',
                     'catalog.models.Item',
+                    'catalog.models.Parametr',
                 ),
             )
         )
@@ -68,17 +69,7 @@ class CustomIndexDashboard(Dashboard):
                 title = u'Заказы',
                 models=(
                     'shop.models.Order',
-                ),
-            )
-        )
-        
-        
-        self.children.append(
-            modules.ModelList(
-                title = u'Обратная связь',
-                models=(
-                    'feedback.models.Feedback',
-                    'call_request.models.CallRequest',
+                    'shop.models.Cart',
                 ),
             )
         )

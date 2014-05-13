@@ -17,7 +17,7 @@ from catalog.models import Category, Item
 from shop.models import Cart, Order
 from shop.forms import OrderForm
 from sessionworking import SessionCartWorking
-from users.forms import RegisterForm, OrderDataFizForm, OrderDataUrForm
+from users.forms import OrderDataFizForm
 from slideshow.models import Slider
 
 NEWS_PAGINATION_COUNT = 10
@@ -208,11 +208,7 @@ def order(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/cart/')
     profile = request.user.get_profile()
-    is_legal=profile.is_legal
-    if is_legal:
-        module = OrderDataUrForm
-    else:
-        module = OrderDataFizForm
+    module = OrderDataFizForm
     
     if request.method == 'GET':
         form = module(instance=profile.get_orderdata(), initial={'fio': profile.fio})
@@ -233,10 +229,7 @@ def order(request):
         
     c['form'] = form
     c['orderform'] = orderform
-    if is_legal:
-        return render_to_response('order_ur.html', c, context_instance=RequestContext(request))
-    else:
-        return render_to_response('order_fiz.html', c, context_instance=RequestContext(request))
+    return render_to_response('order_fiz.html', c, context_instance=RequestContext(request))
 
 
 def lk(request):
@@ -244,11 +237,7 @@ def lk(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/')
     profile = request.user.get_profile()
-    is_legal=profile.is_legal
-    if is_legal:
-        module = OrderDataUrForm
-    else:
-        module = OrderDataFizForm
+    module = OrderDataFizForm
     form = module(instance=profile.get_orderdata(), initial={'fio': profile.fio})
     if request.method == 'GET':
         c['form'] = form
@@ -262,10 +251,7 @@ def lk(request):
             profile.save()
             return HttpResponseRedirect('/lk/')
     c['form'] = form
-    if is_legal:
-        return render_to_response('lk_ur.html', c, context_instance=RequestContext(request))
-    else:
-        return render_to_response('lk_fiz.html', c, context_instance=RequestContext(request))
+    return render_to_response('lk_fiz.html', c, context_instance=RequestContext(request))
     
 
 def other_page(request, page_name):

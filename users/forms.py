@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
  
 from django.forms import ModelForm, Form, fields, PasswordInput
-from models import UserProfile, UserOrderDataFiz, UserOrderDataUr
+from models import UserProfile, UserOrderDataFiz
 from django.forms.widgets import TextInput
  
 class ProfileForm(ModelForm):
@@ -31,16 +31,3 @@ class OrderDataFizForm(ModelForm):
     contacts = fields.CharField(label = u'Контакты', widget=TextInput(attrs={'placeholder': u'Контакты *'}))
     
     
-class OrderDataUrForm(ModelForm):
-    
-    class Meta:
-        model = UserOrderDataUr
-        exclude = ('user', )
-        fields = ('fio', 'inn', 'kpp', 'ur_address', 'address', 'contacts')
-    
-    fio = fields.CharField(label = u'Название', widget=TextInput(attrs={'placeholder': u'Название *'}))
-    inn = fields.CharField(label = u'ИНН', widget=TextInput(attrs={'placeholder': u'ИНН *'}))
-    kpp = fields.CharField(label = u'КПП', widget=TextInput(attrs={'placeholder': u'КПП *'}))
-    ur_address = fields.CharField(label = u'Юридический адрес', widget=TextInput(attrs={'placeholder': u'Юридический адрес *'}))
-    address = fields.CharField(label = u'Адрес доставки', widget=TextInput(attrs={'placeholder': u'Адрес доставки *'}))
-    contacts = fields.CharField(label = u'Контакты', widget=TextInput(attrs={'placeholder': u'Контакты *'}))

@@ -139,6 +139,8 @@ LOGGING = {
 FILE_UPLOAD_MAX_MEMORY_SIZE = 7864320
 CKEDITOR_CONFIGS = {
     'default': {
+        #'defaultLanguage': 'ru',
+        'language': 'ru',
         'toolbar':
            [
                 ['Source', '-', 'Templates'],
@@ -155,7 +157,8 @@ CKEDITOR_CONFIGS = {
         'width': 1056,
         'height': 200,
         'toolbarCanCollapse': True,
-        'resize_enabled': True
+        'resize_enabled': True,
+        
     }
 }
 

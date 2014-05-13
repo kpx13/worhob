@@ -20,7 +20,6 @@ def sendmail(subject, body, to_email=config_value('MyApp', 'EMAIL')):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name='profile', verbose_name=u'пользователь')
     fio = models.CharField(max_length=256, verbose_name=u'ФИО или название компании')
-    is_legal = models.BooleanField(blank=True, verbose_name=u'это юр. лицо')
 
     class Meta:
         verbose_name = u'профиль пользователя'
@@ -28,11 +27,7 @@ class UserProfile(models.Model):
         app_label = string_with_title("users", u"Пользователи")
         
     def get_orderdata(self):
-        if self.is_legal:
-            module = UserOrderDataUr 
-        else:
-            module = UserOrderDataFiz
-        r = module.objects.filter(user=self.user)
+        r = UserOrderDataFiz.objects.filter(user=self.user)
         if r:
             return r[0]
         else:
@@ -63,25 +58,8 @@ class UserOrderDataFiz(models.Model):
     field8 = models.CharField(max_length=63, blank=True,verbose_name=u'Объем бедер')
 
     class Meta:
-        verbose_name = u'данные для заказа физ лица'
-        verbose_name_plural = u'данные для заказов физ лиц'
-        app_label = string_with_title("users", u"Пользователи")
-    
-    def __unicode__ (self):
-        return str(self.user.username)
-    
-    
-class UserOrderDataUr(models.Model):
-    user = models.ForeignKey(User, related_name='orderdataur', verbose_name=u'пользователь')
-    inn = models.CharField(max_length=63, blank=True, verbose_name=u'ИНН')
-    kpp = models.CharField(max_length=63, blank=True,verbose_name=u'КПП')
-    ur_address = models.CharField(max_length=255, blank=True,verbose_name=u'юридический адрес')
-    address = models.CharField(max_length=255, blank=True,verbose_name=u'адрес доставки')
-    contacts = models.CharField(max_length=255, blank=True,verbose_name=u'контакты')    
-
-    class Meta:
-        verbose_name = u'данные для заказа юр лица'
-        verbose_name_plural = u'данные для заказов юр лиц'
+        verbose_name = u'данные для заказа'
+        verbose_name_plural = u'данные для заказов'
         app_label = string_with_title("users", u"Пользователи")
     
     def __unicode__ (self):
