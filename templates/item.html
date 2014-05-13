@@ -44,8 +44,19 @@
                     </ul>
                 </div>
                 <div class="tovar-price__block">
-                    <div class="tovar-price-wrp">Цена: <span class="tovar-price"> {{ item.price|floatformat:"0" }} </span><span> р.</span></div>
-                    <a href="#" class="tovar-price-btn g-btn">Купить</a>
+                    <form method='POST'>
+                        {% if in_cart %}
+                            <a href='/cart/'>Товар в корзине</a>
+                        {% endif %}
+                        <div class="tovar-price-wrp">Цена: <span class="tovar-price"> {{ item.price|floatformat:"0" }} </span><span> р.</span></div>
+                        
+                        <button type="submit" class="tovar-price-btn g-btn">В корзину</button>
+
+                            
+                        <input type="hidden" name='action' value="add_in_basket" />
+                        <input type="hidden" name='item_id' value="{{ item.id }}" />
+                        {% csrf_token %}
+                    </form>
                 </div>
 
             </div>
@@ -61,28 +72,6 @@
 {% endblock %}
 
 {% comment %}
-                <form method='POST'>
-                    {% if in_cart %}
-                        <p><a href='/cart/'>Товар в корзине</a></p>
-                    {% endif %}
-                    <div class="btn btn-blue btn-bb to-cart">
-                        <a><button type="submit" class='reset-btn'>В корзину</button></a>
-                    </div>
-                    <div class="price">{{ item.price|floatformat:"0" }} руб.</div>
-                    <div class="old-price">
-                        {% if item.price_old %}
-                            {{ item.price_old|floatformat:"0" }} руб.
-                        {% endif %}
-                    </div>
-                    <div class="count">
-                        <input type="text" name='count' value="1" id="goods-count">
-                        <label for="goods-count">шт.</label>
-                    </div>                        
-                        
-                    <input type="hidden" name='action' value="add_in_basket" />
-                    <input type="hidden" name='item_id' value="{{ item.id }}" />
-                    {% csrf_token %}
                 
-                </form>
 
 {% endcomment %}

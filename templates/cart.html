@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% load thumbnail %}
+
+{% block title %}Корзина{% endblock %}
+
+
+{% block content %}
+
+    <div class="cart">
+        <h3>Корзина</h3>
+        
+        
+        {% if items %}
+            <table class="cart-items">
+                <tr>
+                    <th>Название</th>
+                    <th> Цена</th>
+                    <th>Артикул</th>
+                    <th> Кол-во</th>
+                    <th class="total">Сумма</th>
+                    <th></th>
+                </tr>
+                
+                {% for i in items %}
+                    <tr class="cart-item">
+                        <td>
+                            {% thumbnail i.item.image.all.0.image "x70" as im %}
+                                <a href="/item/{{ i.item.slug }}/"><img src="{{ im.url }}" alt="{{ i.item.name }}" class="cart-item__icon"></a>
+                            {% endthumbnail %}
+                            <a href="/item/{{ i.item.slug }}/">{{ i.item.name }}</a> 
+                            {{ i.item.description|removetags:"p span img"|truncatechars:190 }}
+                        </td>
+                        <td class="td_bold"><span class="cart-item__price">{{ i.price|floatformat:"0" }}</span> р.</td>
+                        <td><span class="cart-item__art">{{ i.item.art }}</span></td>
+                        <td>
+                            <form method='POST'>
+                                <input type="text" class="cart-item__amount" value="{{ i.count }}" name='set_count' maxlength="3"/>
+                                <input type="hidden" name='item_id' value="{{ i.item.id }}" />
+                                <input type="hidden" name='action' value="set_count" />
+                                {% csrf_token %}
+                            </form>       
+                            
+                        </td>
+                        <td class="td_bold"><span class="cart-item__price_all">{{ i.sum|floatformat:"0" }}</span> р.</td>
+                        <td>
+                            <form method='POST'>
+                                <button type="submit" name='action' value="del_from_basket"  class="cart-item__remove"/>x</button>
+                                <input type="hidden" name='item_id' value="{{ i.item.id }}" />
+                                {% csrf_token %}
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                
+            </table>
+            <div class="tovar-price__block">
+                <div class="tovar-price-wrp">Итого: <span class="tovar-price _sum">{{ cart_sum|floatformat:"0" }} </span><span> р.</span></div>
+                <a href="#" class="tovar-price-btn g-btn">Оформить</a>
+            </div>
+        {% else %}
+            <h2>Ваша корзина пуста.</h2>
+        {% endif %}
+    </div>
+{% endblock %}
+

@@ -106,6 +106,8 @@ def category(request, slug):
 
 def category_filter(request, slug):
     c = get_common_context(request)
+    if 'category' in request.POST:
+        slug = request.POST['category']
     if slug:
         c['category'] = Category.get_by_slug(slug)
         items = Item.objects.filter(category__in=c['category'].get_descendants(include_self=True))
@@ -123,6 +125,8 @@ def category_filter(request, slug):
                     items = Item.filter_by_parametr(items, p_id, p_value)
     else:
         items = Item.objects.all()
+    if 'q' in request.POST:
+        items = items.filter(name__icontains=request.POST['q'])
     
     c['items'] = items
     return render_to_response('catalog.html', c, context_instance=RequestContext(request))
@@ -131,7 +135,7 @@ def item(request, slug):
     c = get_common_context(request)
     if request.method == 'POST':
         if request.POST['action'] == 'add_in_basket':
-            c['cart_working'].add_to_cart(request.user, request.POST['item_id'], int(request.POST['count']))
+            c['cart_working'].add_to_cart(request.user, request.POST['item_id'], 1)
         return HttpResponseRedirect(request.get_full_path())
     c['item'] = Item.get_by_slug(slug)
     c['category'] = c['item'].category
@@ -145,8 +149,11 @@ def cart(request):
         if request.POST['action'] == 'del_from_basket':
             c['cart_working'].del_from_cart(request.user, request.POST['item_id'])
             return HttpResponseRedirect(request.get_full_path())
-        elif ('set_count' in request.POST) and (int(request.POST['set_count']) != c['cart_working'].get_count(request.user, request.POST['item_id'])):
-            c['cart_working'].set_count(request.user, request.POST['item_id'], request.POST['set_count'])
+        elif request.POST['action'] == 'set_count':
+            try:
+                c['cart_working'].set_count(request.user, request.POST['item_id'], request.POST['set_count'])
+            except:
+                pass
             return HttpResponseRedirect(request.get_full_path())
         elif request.POST['action'] == 'plus':
             c['cart_working'].count_plus(request.user, request.POST['item_id'])

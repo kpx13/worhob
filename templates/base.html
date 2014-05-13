@@ -56,12 +56,12 @@
         <div class="cart-side">
             <p>В корзине</p>
 
-            <p class="cart-side__red"><span class="cart-side__items-amount">1 </span></p>
+            <p class="cart-side__red"><span class="cart-side__items-amount">{{ cart_count }} </span></p>
 
             <p>на сумму </p>
 
-            <p class="cart-side__red"><span class="cart-side__items-sum">12600 </span> руб.</p>
-            <a href="#" class="cart-side__btn g-btn">Купить</a>
+            <p class="cart-side__red"><span class="cart-side__items-sum"> {{ cart_sum|floatformat:"0" }} </span> р.</p>
+            <a href="/cart/" class="cart-side__btn g-btn">Купить</a>
         </div>
     </div>
 </div>
@@ -82,7 +82,7 @@
                     {% endif %}
             </div>
             <div class="header__phone"><span class="header__phone__code">+7 (495)</span> 555-55-55</div>
-            <a href="#" class="header__search">Расширенный поиск</a>
+            
         </div>
         <nav class="header__nav">
             <a href="/" class="header__nav__i {% if 'home' in request_url %}active{% endif %}">Главная </a>

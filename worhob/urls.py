@@ -27,6 +27,7 @@ urlpatterns = patterns('',
     
     url(r'^catalog/$', views.catalog),
     url(r'^filter/(?P<slug>[\w-]+)/$', views.category_filter),
+    url(r'^filter/$', views.category_filter, {'slug': None}),
     url(r'^category/(?P<slug>[\w-]+)/$', views.category),
     url(r'^category/$', views.category, {'slug': None}),
     url(r'^item/(?P<slug>[\w-]+)/$' , views.item),
