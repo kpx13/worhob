@@ -4,6 +4,7 @@ from mptt.models import MPTTModel, TreeForeignKey
 from django.db import models
 from ckeditor.fields import RichTextField
 import pytils
+from pytils import translit
 import datetime
 from dashboard import string_with_title
 from django.db.models import Q
@@ -175,7 +176,8 @@ class Item(models.Model):
 
 class Image(models.Model):
     item = models.ForeignKey(Item, verbose_name=u'товар', related_name='image')
-    image = models.ImageField(upload_to='uploads/items', max_length=256, blank=True, verbose_name=u'изображение')
+    image = models.ImageField(upload_to=lambda instance, filename: 'uploads/items/' + translit.translify(filename),
+				max_length=256, blank=True, verbose_name=u'изображение')
     order = models.IntegerField(null=True, blank=True, default=100, verbose_name=u'порядок сортировки')
 
     @staticmethod

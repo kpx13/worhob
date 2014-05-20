@@ -10,7 +10,7 @@
     <h4 class="catalog__item__title"><a href="/item/{{ i.slug }}/">{{ i.name }}</a></h4>
 
     <div class="catalog__item__descr">
-        {{ i.description|removetags:"p span img"|truncatechars:90 }}
+        {{ i.description|removetags:"p span img br"|truncatechars:90|safe }}
     </div>
     <div class="catalog__item__price-wrp">
         <span class="catalog__item__price">{{ i.price|floatformat:"0" }} р.</span>
