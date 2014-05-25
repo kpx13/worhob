@@ -675,7 +675,7 @@ select::-ms-expand {
     border-left: 1px solid #b4b3a8;
     vertical-align: top;
     min-height: 250px;
-    min-width: 198px;
+    width: 198px !important;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
