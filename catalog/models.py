@@ -31,6 +31,7 @@ class Category(MPTTModel):
     name = models.CharField(max_length=127, verbose_name=u'название')
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children', verbose_name=u'родительская категория')
     parametrs = models.ManyToManyField(Parametr, null=True, blank=True, verbose_name=u'параметры')
+    #desc = models.TextField(default=u'', blank=True, null=True, verbose_name=u'описание категории')
     order = models.IntegerField(null=True, blank=True, default=0, verbose_name=u'порядок сортировки')
     slug = models.SlugField(max_length=127, verbose_name=u'слаг', unique=True, blank=True, help_text=u'заполнять не нужно')
     
