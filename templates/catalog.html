@@ -14,8 +14,15 @@
                 {% include 'item_short.html' with i=i %}
             {% endfor %}
         </div>
+    </div>
     {% else %}
         <h3>В этой категории нет товаров.</h3>
     {% endif %}
+	{% if category.desc %}
+        <div class="text-block">
+               <div class="heading"><span>Описание</span></div>
+        <p>{{ category.desc }}</p>
+        {% endif %}
+
     
 {% endblock %}
