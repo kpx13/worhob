@@ -1,0 +1,1 @@
+python manage.py dumpdata catalog news pages shop slideshow auth users > dump_all___.json
