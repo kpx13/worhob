@@ -63,7 +63,9 @@
             <a href="/kontaktyi/" class="header__nav__i {% if 'kontaktyi' in request_url %}active{% endif %}">Контакты </a>
         </nav>
         
-        {% include 'catalog_menu.html' %}
+	{% block catalog_menu %}
+            {% include 'catalog_menu.html' %}
+	{% endblock %}
     </header>
     {% block filter %}
         {% include 'search.html' %}

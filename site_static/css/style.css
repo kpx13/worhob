@@ -236,7 +236,7 @@ input[type='checkbox']:checked + label.popup-check:before {
 }
 
 .header {
-    min-height: 330px;
+	 min-height: 200px;
     position: relative;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -395,7 +395,7 @@ input[type='checkbox']:checked + label.popup-check:before {
 .header__tags ul {
     display: inline-block;
     vertical-align: top;
-    width: 145px;
+    width: 200px;
     text-align: left;
 }
 

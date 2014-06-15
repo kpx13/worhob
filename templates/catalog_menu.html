@@ -4,7 +4,7 @@
                     {% if node.children.all|length > 2 %}
                         </ul><ul>
                     {% endif %}
-                    <li><a href="/category/{{ node.slug }}/"><b>{{ node.name }}</b></a></li>
+                    <li><a href="/category/{{ node.slug }}/" style='font-size: large'><b>{{ node.name }}</b></a></li>
                     {% for i in node.children.all %}
                         <li><a href="/category/{{ i.slug }}/">{{ i.name }}</a></li>
                     {% endfor %}
