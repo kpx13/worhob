@@ -849,7 +849,7 @@ h2 span{
     border-radius: 50%;
     background: #d49343 url(../img/cart-icon.png) no-repeat 7px 8px;
     float: right;
-    margin-top: 4px;
+    margin-top: -37px;
 }
 .catalog__item__descr{
     font-size: 12px;

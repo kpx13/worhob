@@ -14,6 +14,12 @@
     </div>
     <div class="catalog__item__price-wrp">
         <span class="catalog__item__price">{{ i.price|floatformat:"0" }} р.</span>
-        <a class="addToCart" href="/item/{{ i.slug }}/"></a>
+        
+        <form method='POST' action='/item/{{ i.slug }}/' style='border: none; padding: 0px; margin: 0px;'>
+            <button type="submit" class="addToCart"></button>
+            <input type="hidden" name='action' value="add_in_basket" />
+            <input type="hidden" name='item_id' value="{{ i.id }}" />
+            {% csrf_token %}
+        </form>
     </div>
 </div>
