@@ -166,12 +166,8 @@ class Order(models.Model):
         
         
         profile = self.user.get_profile()
-        is_legal=profile.is_legal
-        from users.forms import OrderDataFizForm, OrderDataUrForm
-        if is_legal:
-            module = OrderDataUrForm
-        else:
-            module = OrderDataFizForm
+        from users.forms import OrderDataFizForm
+        module = OrderDataFizForm
         orderdata = module(instance=profile.get_orderdata(), initial={'fio': profile.fio})
         
         

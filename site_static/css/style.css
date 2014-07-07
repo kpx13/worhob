@@ -395,7 +395,7 @@ input[type='checkbox']:checked + label.popup-check:before {
 .header__tags ul {
     display: inline-block;
     vertical-align: top;
-    width: 200px;
+    width: 170px;
     text-align: left;
 }
 
